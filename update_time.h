@@ -10,6 +10,9 @@ class update_time : public QObject
 public:
     explicit update_time(QObject *parent = nullptr);
     void upd_time();
+    ~update_time(){
+        delete timer;
+    }
 
 signals:
     void updtime(QString);

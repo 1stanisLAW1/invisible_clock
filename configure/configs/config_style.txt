@@ -1,4 +1,4 @@
 [main]
 Color = White
-Size = 72
-Family = Vani
+Size = 96
+Family = Ink Free

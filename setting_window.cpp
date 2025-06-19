@@ -44,16 +44,19 @@ void setting_window::show_setting()
     layout->addWidget(save_btn,3,1);
     layout->addWidget(back_btn,3,0);
 
-    connect(save_btn,&QPushButton::clicked,this,[this](){
+    connect(save_btn,&QPushButton::clicked,this,[=](){
         QStringList list;
         list.append(line_color->currentText());
         list.append(line_size->currentText());
         list.append(line_family->currentText());
         emit write_settings(list);
         emit set_setting(list);
+        widget->close();
+        delete widget;
     });
     connect(back_btn,&QPushButton::clicked,this,[=](){
         widget->close();
+        delete widget;
     });
 
     widget->setLayout(layout);

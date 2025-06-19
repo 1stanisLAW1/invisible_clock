@@ -2,6 +2,7 @@
 #define SETTING_WINDOW_H
 
 #include "qcombobox.h"
+#include "write_config.h"
 #include <QObject>
 
 class setting_window : public QObject
@@ -11,6 +12,13 @@ public:
     explicit setting_window(QObject *parent = nullptr);
     void show_setting();
     void setComboBox();
+    ~setting_window(){
+        delete line_color;
+        delete line_size;
+        delete line_family;
+        deleteLater();
+        delete this;
+    }
 
 signals:
     void set_setting(QStringList);
@@ -21,6 +29,8 @@ private:
     QComboBox* line_color;
     QComboBox* line_size;
     QComboBox* line_family;
+    QWidget* widget = nullptr;
+    write_config* wc = nullptr;
 };
 
 #endif // SETTING_WINDOW_H

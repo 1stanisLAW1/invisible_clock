@@ -23,9 +23,8 @@ gui_clock::gui_clock(QObject *parent)
     btn_setting = new QPushButton();
     btn = new QPushButton("-");
 
-    setting_window* sw = new setting_window();
-
-    write_config* wc = new write_config();
+    sw = new setting_window();
+    wc = new write_config();
 
    update_time* upd = new update_time();
    upd->moveToThread(thread);
@@ -38,6 +37,7 @@ gui_clock::gui_clock(QObject *parent)
    connect(this,&gui_clock::signal_setting,sw,&setting_window::default_setting_comboBox);
 
     dialog = new QDialog();
+    dialog->setWindowFlags(Qt::FramelessWindowHint | Qt::Dialog);
     dialog->setAttribute(Qt::WA_TranslucentBackground);
     dialog->setStyleSheet("QDialog { background: transparent; }");
 
@@ -108,6 +108,22 @@ void gui_clock::setTime()
 
     lbl->setText(t);
     lbl_2->setText(dayName+", "+d);
+}
+
+gui_clock::~gui_clock()
+{
+    thread->quit();
+    thread->wait();
+
+    delete lbl;
+    delete lbl_2;
+    delete dialog;
+    delete thread;
+    delete btn;
+    delete btn_setting;
+    delete sw;
+    delete wc;
+
 }
 
 void gui_clock::upd_t(QString time)
