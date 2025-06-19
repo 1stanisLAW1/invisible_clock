@@ -1,0 +1,4 @@
+[main]
+Color = White
+Size = 72
+Family = Vani
